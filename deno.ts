@@ -1,19 +1,14 @@
-import { serve } from 'https://deno.land/std@0.100.0/http/server.ts';
+import express, {Express, Request, Response} from "npm:express"
 
-const PORT = 3000;
+const app : Express = express()
 
-/** Create Server */
-const server = serve({
-  port: PORT,
-});
+app.get("/", (req: Request, res:Response)=>{
+    res.send("HOLA DESDE MAIN PAGE")
+})
 
-console.log('http://localhost:' + PORT);
-for await (const req of server) {
-  req.respond({
-    status: 200,
-    headers: new Headers({
-      'content-type': 'text/html',
-    }),
-    body: '<h2>Hola seguidores de Coder!!!</h2>',
-  });
-}
+app.post("/", (req: Request, res:Response)=>{
+    res.send("HOLA DESDE POST A MAIN PAGE")
+})
+
+app.listen(8000)
+console.log(`Server up in ${8000}`)
